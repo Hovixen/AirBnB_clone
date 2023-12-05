@@ -8,7 +8,10 @@ class HBNBCommand(cmd.Cmd):
     """ The class responsible for the commands to manipulate the objects """
     prompt = "(hbnb) "
 
-    do_
+    def do_EOF(self, line):
+        """ End of file function with Ctrl D """ 
+        print("")
+        return True
 
 
 if __name__ == '__main__':
