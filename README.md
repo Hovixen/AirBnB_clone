@@ -21,7 +21,7 @@ This is the first phase of a four phase project, to create a basic clone of the 
 ## Environment :video_game:
 The console was developed in `Ubuntu 20.04LTS`.
 
-### Further information :magnifying_glass_tilted_right:
+### Further information :magnifying_glass:
 For further information on python version, and documentation visit [python.org](https://www.python.org/).
 
 ## Requirements :card_file_box:
