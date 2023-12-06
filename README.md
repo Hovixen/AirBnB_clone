@@ -1,4 +1,4 @@
-# AirBnB Clone [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)] [![Build Status](https://travis-ci.org/luischaparroc/AirBnB_clone.svg?branch=master)]
+# AirBnB Clone ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ![Build Status](https://travis-ci.org/luischaparroc/AirBnB_clone.svg?branch=master)
 ![HBnB Logo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrg8gNSYk0nYCCEmHrbv52AbFktwgIuvxkqniGW-rzfg8SfLIfZKScs8yRZA&s)
 
 
