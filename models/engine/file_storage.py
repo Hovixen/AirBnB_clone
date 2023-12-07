@@ -35,10 +35,7 @@ class FileStorage():
                 new = json.load(file)
                 for key, obj_dict in new.items():
                     class_name, obj_id = key.split('.')
-                    if class_name = "User":
-                        obj = User(**obj_dict)
-                    else:
-                        obj = globals()[class_name](**obj_dict)
+                    obj = globals()[class_name](**obj_dict)
                     self.__objects[key] = obj
         except FileNotFoundError:
             pass
