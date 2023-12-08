@@ -3,6 +3,8 @@
 
 
 import json
+from models.base_model import BaseModel
+from models.user import User
 from models.amenity import Amenity
 from models.city import City
 from models.place import Place
@@ -39,7 +41,6 @@ class FileStorage():
     def reload(self):
         """ loads objects from file """
         try:
-            new = {}
             with open(self.__file_path, mode="r", encoding="utf-8") as file:
                 new = json.load(file)
                 for key, obj_dict in new.items():
