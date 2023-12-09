@@ -10,6 +10,11 @@ class FileStorage():
     """ class FileStorage"""
     __file_path = "file.json"
     __objects = {}
+    """ classes = {
+            "Place": Place, "State": State, "City": City,
+            "Amenity": Amenity, "Review": Review
+            }
+    """
 
     def all(self):
         """ return dictionary of objects """
@@ -32,9 +37,19 @@ class FileStorage():
         """ loads objects from existing file.jason """
         # This import is uses here to prevent circular import
         from models.base_model import BaseModel
+        from models.user import User
+        from models.amenity import Amenity
+        from models.city import City
+        from models.place import Place
+        from models.state import State
+        from models.review import Review
+
         # a class mapping dictionary to get the class
 
-        cls_dic = {'BaseModel': BaseModel}
+        cls_dic = {'BaseModel': BaseModel, 'User': User,
+                   'Amenity': Amenity, 'City': City,
+                   'Place': Place, 'State': State,
+                   'Review': Review}
 
         j_file = os.path.exists(self.__file_path)
         if j_file:

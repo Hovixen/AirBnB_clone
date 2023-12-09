@@ -2,6 +2,12 @@
 
 import cmd
 from models.base_model import BaseModel
+from models.user import User
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.state import State
+from models.review import Review
 from models import storage
 """ This console is for manipulating objects with certain comands """
 
@@ -10,7 +16,7 @@ class HBNBCommand(cmd.Cmd):
     """ The class responsible for the commands to manipulate the objects """
     prompt = "(hbnb) "
 
-    list_cls = [BaseModel]
+    list_cls = [BaseModel, User, Amenity, City, Place, State, Review]
     class_dic = {classes.__name__: classes for classes in list_cls}
 
     def do_quit(self, line):
