@@ -56,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
 
         if cls_name not in [cls.__name__ for cls in HBNBCommand.list_cls]:
             print("** class doesn't exist **")
-        elif len(arg) == 1:
+        elif len(arg) < 2:
             print("** instance id is missing **")
         else:
             cls_id = arg[1].strip('"')
@@ -84,7 +84,7 @@ class HBNBCommand(cmd.Cmd):
 
         if cls_name not in [cls.__name__ for cls in HBNBCommand.list_cls]:
             print("** class doesn't exist **")
-        elif len(arg) == 1:
+        elif len(arg) < 2:
             print("** instance id is missing **")
         else:
             cls_id = arg[1].strip('"')
@@ -127,10 +127,49 @@ class HBNBCommand(cmd.Cmd):
                         objects.append(str(obj))
                 print(objects)
 
+    def do_update(self, args):
+        """
+        Updates an instance based on the class name and id
+        by adding or updating an attribute.
+        Syntax: update <class_name> <id> <attribute_name> "<attribute_val>" or
+                <class name>.update(<id>, <dictionary representation>) or
+                <class_name>.update(<id>, <attribute_name>, <attribute_val>)
+        """
+
+        if not args:
+            print("** class name missing **")
+            return
+
+        arg = args.split()
+        cls_name = arg[0]
+
+        if cls_name not in [cls.__name__ for cls in HBNBCommand.list_cls]:
+            print("** class doesn't exist **")
+        elif len(args) < 2:
+            print("** instance id missing **")
+        else:
+            cls_id = arg[1]
+            obj_key = cls_name + "." + cls_id
+
+            if obj_key not in storage.all():
+                print("** no instance found **")
+            elif len(args) < 3:
+                print("** attribute name missing **")
+            elif len(args) < 4:
+                print("** value missing **")
+            else:
+                attr_name = arg[2]
+                attr_val = arg[3].strip('"')
+
+                objects = storage.all()[obj_key]
+                setattr(objects, attr_name, attr_val)
+
+                objects.save()
+
 
 if __name__ == '__main__':
-    # try:
-    HBNBCommand().cmdloop()
-    # except KeyboardInterrupt:
-    #    print('')
-    #    exit
+    try:
+        HBNBCommand().cmdloop()
+    except KeyboardInterrupt:
+        print('')
+        exit
