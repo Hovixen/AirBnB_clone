@@ -51,7 +51,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        arg = args.split(' ')
+        arg = args.split()
         cls_name = arg[0]
 
         if cls_name not in [cls.__name__ for cls in HBNBCommand.list_cls]:
@@ -79,9 +79,9 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        arg = args.split(' ')
+        arg = args.split()
         cls_name = arg[0]
-    
+
         if cls_name not in [cls.__name__ for cls in HBNBCommand.list_cls]:
             print("** class doesn't exist **")
         elif len(arg) == 1:
@@ -103,6 +103,29 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
             else:
                 print("** no instance found **")
+
+    def do_all(self, args):
+        """
+        Prints all string representation of all instance
+        based or not on the class name
+        Syntax: all or all <class_nam>
+        """
+        arg = args.split()
+        objects = []
+
+        if not args:
+            for obj in storage.all().values():
+                objects.append(str(obj))
+            print(objects)
+        else:
+            cls_name = arg[0]
+            if cls_name not in [cls.__name__ for cls in HBNBCommand.list_cls]:
+                print("** class doesn't exist **")
+            else:
+                for key, obj in storage.all().items():
+                    if cls_name == key.split('.')[0]:
+                        objects.append(str(obj))
+                print(objects)
 
 
 if __name__ == '__main__':
