@@ -10,7 +10,7 @@ import json
 # from models.place import Place
 # from models.state import State
 # from models.review import Review
-import os
+
 
 class FileStorage():
     """ class FileStorage"""

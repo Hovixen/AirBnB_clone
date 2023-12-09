@@ -1,63 +1,65 @@
-#!/usr/bin/python3
 import unittest
-from datetime import datetime
 from models.base_model import BaseModel
-import os
+from datetime import datetime
+import uuid
 
 
 class TestBaseModel(unittest.TestCase):
-    def test_to_dict(self):
-        instance = BaseModel()
-        result_dict = instance.to_dict()
 
-        """Check if keys are present in the dictionary"""
-        self.assertIn('id', result_dict)
-        self.assertIn('created_at', result_dict)
-        self.assertIn('updated_at', result_dict)
-        self.assertIn('__class__', result_dict)
+    def test_attributes(self):
+        # Test id attribute
+        obj = BaseModel()
+        self.assertTrue(hasattr(obj, 'id'))
+        self.assertIsInstance(obj.id, str)
 
-        """Check if values are of the expected types"""
-        self.assertIsInstance(result_dict['id'], str)
-        self.assertIsInstance(result_dict['created_at'], str)
-        self.assertIsInstance(result_dict['updated_at'], str)
-        self.assertIsInstance(result_dict['__class__'], str)
+        # Test created_at and updated_at attributes
+        self.assertTrue(hasattr(obj, 'created_at'))
+        self.assertIsInstance(obj.created_at, datetime)
+        self.assertTrue(hasattr(obj, 'updated_at'))
+        self.assertIsInstance(obj.updated_at, datetime)
 
-        """Check if datetime strings can be
-        converted back to datetime objects"""
-        created_at = datetime.strptime(
-                result_dict['created_at'], "%Y-%m-%dT%H:%M:%S.%f")
-        updated_at = datetime.strptime(
-                result_dict['updated_at'], "%Y-%m-%dT%H:%M:%S.%f")
+    def test_str_method(self):
+        # Test __str__ method
+        obj = BaseModel()
+        expected_str = "[BaseModel] ({}) {}".format(obj.id, obj.__dict__)
+        self.assertEqual(str(obj), expected_str)
 
-        """Check if datetime objects are approximately equal"""
-        self.assertAlmostEqual(
-                instance.created_at.timestamp(),
-                created_at.timestamp(), places=2)
-        self.assertAlmostEqual(
-                instance.updated_at.timestamp(),
-                updated_at.timestamp(), places=2)
+    def test_save_method(self):
+        # Test save method
+        obj = BaseModel()
+        original_updated_at = obj.updated_at
+        obj.save()
+        self.assertNotEqual(original_updated_at, obj.updated_at)
 
-    def test_init_with_kwargs(self):
-        kwargs_data = {
-            "id": "some_id",
-            "created_at": "2023-12-06T12:00:00.000000",
-            "updated_at": "2023-12-06T14:30:00.000000",
-            "custom_attribute": "custom_value"
-        }
+    def test_to_dict_method(self):
+        # Test to_dict method
+        obj = BaseModel()
+        obj_dict = obj.to_dict()
 
-        instance = BaseModel(**kwargs_data)
+        self.assertIsInstance(obj_dict, dict)
+        self.assertIn('__class__', obj_dict)
+        self.assertEqual(obj_dict['__class__'], 'BaseModel')
 
-        """Check if attributes are set correctly"""
-        self.assertEqual(instance.id, kwargs_data['id'])
-        self.assertEqual(
-                instance.created_at.isoformat(), kwargs_data['created_at'])
-        self.assertEqual(
-                instance.updated_at.isoformat(), kwargs_data['updated_at'])
+        # Check that created_at and updated_at are in ISO format strings
+        self.assertIn('created_at', obj_dict)
+        self.assertIn('updated_at', obj_dict)
+        self.assertIsInstance(obj_dict['created_at'], str)
+        self.assertIsInstance(obj_dict['updated_at'], str)
 
-        """Check if the custom attribute is set correctly"""
-        self.assertEqual(getattr(
-            instance, 'custom_attribute', None),
-            kwargs_data['custom_attribute'])
+    def test_unique_ids(self):
+        # Test unique ids for different instances
+        obj1 = BaseModel()
+        obj2 = BaseModel()
+
+        self.assertNotEqual(obj1.id, obj2.id)
+
+    def test_uuid_format(self):
+        # Test that id is a valid UUID
+        obj = BaseModel()
+        try:
+            uuid.UUID(obj.id, version=4)
+        except ValueError:
+            self.fail("Invalid UUID format for id")
 
 
 if __name__ == '__main__':
