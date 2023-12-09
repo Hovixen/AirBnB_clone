@@ -3,23 +3,24 @@
 
 
 import json
-from models.base_model import BaseModel
-from models.user import User
-from models.amenity import Amenity
-from models.city import City
-from models.place import Place
-from models.state import State
-from models.review import Review
+# from models.base_model import BaseModel
+# from models.user import User
+# from models.amenity import Amenity
+# from models.city import City
+# from models.place import Place
+# from models.state import State
+# from models.review import Review
 
 
 class FileStorage():
     """ class FileStorage"""
     __file_path = "file.json"
     __objects = {}
-    classes = {
+    """ classes = {
             "Place": Place, "State": State, "City": City,
             "Amenity": Amenity, "Review": Review
             }
+    """
 
     def all(self):
         """ return dictionary of objects """
@@ -45,7 +46,7 @@ class FileStorage():
                 new = json.load(file)
                 for key, obj_dict in new.items():
                     class_name, obj_id = key.split('.')
-                    obj = globals()[class_name](**obj_dict)
+                    obj = globals()[class_name][obj_id](**obj_dict)
                     self.__objects[key] = obj
         except FileNotFoundError:
             pass

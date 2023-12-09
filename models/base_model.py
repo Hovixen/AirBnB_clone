@@ -16,7 +16,7 @@ class BaseModel():
                 if key != "__class__":
                     if key in ["created_at", "updated_at"]:
                         value = datetime.strptime(
-                                value, "%y-%m-%dT%H:%M:%S.%f")
+                                value, "%Y-%m-%dT%H:%M:%S.%f")
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
@@ -38,7 +38,7 @@ class BaseModel():
         """ method returns a dict with keys/values """
         new_dict = {}
         for key in dir(self):
-            if not key.startswith("__") and not collable(getattr(self, key)):
+            if not key.startswith("__") and not callable(getattr(self, key)):
                 new_dict[key] = getattr(self, key)
         new_dict["__class__"] = self.__class__.__name__
         new_dict["created_at"] = self.created_at.isoformat()
