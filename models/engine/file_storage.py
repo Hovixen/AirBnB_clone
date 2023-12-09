@@ -10,7 +10,7 @@ import json
 # from models.place import Place
 # from models.state import State
 # from models.review import Review
-
+import os
 
 class FileStorage():
     """ class FileStorage"""
@@ -28,7 +28,7 @@ class FileStorage():
 
     def new(self, obj):
         """ assigns objects """
-        key = "{} {}".format(obj.__class__.__name__, obj.id)
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects[key] = obj
 
     def save(self):
@@ -36,17 +36,23 @@ class FileStorage():
         dic = {}
         for key, obj in self.__objects.items():
             dic[key] = obj.to_dict()
-        with open(self.__file_path, mode="w", encoding="utf-8") as file:
+        with open(self.__file_path, "w", encoding="utf-8") as file:
             json.dump(dic, file)
 
     def reload(self):
-        """ loads objects from file """
-        try:
-            with open(self.__file_path, mode="r", encoding="utf-8") as file:
+        """ loads objects from existing file.jason """
+        # This import is uses here to prevent circular import
+        from models.base_model import BaseModel
+        # a class mapping dictionary to get the class
+
+        cls_dic = {'BaseModel': BaseModel}
+
+        j_file = os.path.exists(self.__file_path)
+        if j_file:
+            with open(self.__file_path, "r", encoding="utf-8") as file:
                 new = json.load(file)
                 for key, obj_dict in new.items():
-                    class_name, obj_id = key.split('.')
-                    obj = globals()[class_name][obj_id](**obj_dict)
-                    self.__objects[key] = obj
-        except FileNotFoundError:
-            pass
+                    get_class = obj_dict.get('__class__')
+                    obj_class = cls_dic[get_class]
+                    obj = obj_class(**obj_dict)
+                    self.new(obj)
