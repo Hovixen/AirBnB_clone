@@ -172,7 +172,7 @@ class HBNBCommand(cmd.Cmd):
 
                 objects.save()
 
-    def do_count_cmd(self, args):
+    def do_count(self, args):
         """
         Retrieves the number of instance of a class
         Syntax: <class_name>.count()
@@ -189,6 +189,37 @@ class HBNBCommand(cmd.Cmd):
                     if isinstance(obj, HBNBCommand.class_dic[cls_name]):
                         count += 1
                 print(count)
+
+    def do_cmd(self, args):
+        """
+        Executes a custom command
+        Syntax: <class_name>.<command>(<args>)
+        Example: User.show("95b89993-f866-4f93-b4c0-990389b518b1")
+        """
+        if not args:
+            print("** command missing **")
+        else:
+            try:
+                arg_split = args.split('.')
+                csl_name = arg.split[0]
+                # removing the ')' from the remaining command & argument
+                cmd_arg = arg_split[1][:-1]
+                command = cmd_arg.split('(')[0]
+                arg = cmd_arg.split('(')[1]
+
+                # getting the class name from the class dictonary
+
+                cls = HBNBCommand.cls_dic[cls_name]
+                method = getattr(cls, command)
+                method(arg)
+            except Exception as e:
+                print(f"Error: {e}")
+
+    def default(self, line):
+        """
+        Default method to handle customized commands
+        """
+        self.do_cmd(line)
 
 
 if __name__ == '__main__':
