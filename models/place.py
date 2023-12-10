@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-
-from models.base_model import BaseModel
 """
 inherits from class BaseModel
 Public class attributes:
@@ -16,6 +14,7 @@ Public class attributes:
     longitude: float - 0.0
     amenity_ids: list of string - empty list
 """
+from models.base_model import BaseModel
 
 
 class Place(BaseModel):

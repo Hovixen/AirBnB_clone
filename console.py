@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+""" This console is for manipulating objects with certain comands """
 import cmd
 from models.base_model import BaseModel
 from models.user import User
@@ -9,7 +9,6 @@ from models.place import Place
 from models.state import State
 from models.review import Review
 from models import storage
-""" This console is for manipulating objects with certain comands """
 
 
 class HBNBCommand(cmd.Cmd):
@@ -114,7 +113,7 @@ class HBNBCommand(cmd.Cmd):
         """
         Prints all string representation of all instance
         based or not on the class name
-        Syntax: all or all <class_nam>
+        Syntax: all or all <class_name>
         """
         arg = args.split()
         objects = []
@@ -190,7 +189,7 @@ class HBNBCommand(cmd.Cmd):
                         count += 1
                 print(count)
 
-    def do_cmd(self, args):
+    def custom_cmd(self, args):
         """
         Executes a custom command
         Syntax: <class_name>.<command>(<args>)
@@ -231,12 +230,12 @@ class HBNBCommand(cmd.Cmd):
         """
         Default method to handle customized commands
         """
-        self.do_cmd(line)
+        self.custom_cmd(line)
 
 
 if __name__ == '__main__':
-    try:
-        HBNBCommand().cmdloop()
-    except KeyboardInterrupt:
-        print('')
-        exit
+    # try:
+    HBNBCommand().cmdloop()
+    # except KeyboardInterrupt:
+    # print('')
+    # exit

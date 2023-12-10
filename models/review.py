@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-
-from models.base_model import BaseModel
 """
 inherits from class BaseModel
 Public class attributes:
@@ -8,6 +6,7 @@ Public class attributes:
     user_id: string - empty string: it will be the User.id
     text: string - empty string
 """
+from models.base_model import BaseModel
 
 
 class Review(BaseModel):
