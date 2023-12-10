@@ -29,5 +29,6 @@ class TestMyCity(unittest.TestCase):
         """Check if name is a str"""
         self.assertTrue(type(self.new.name) is str)
 
+
 if __name__ == '__main__':
     unittest.main()
