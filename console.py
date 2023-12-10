@@ -199,6 +199,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** command missing **")
         else:
+            msg = "*** Unknown syntax: {}".format(args)
             try:
                 arg_split = args.split('.')
                 cls_name = arg_split[0]
@@ -210,10 +211,21 @@ class HBNBCommand(cmd.Cmd):
                 # getting the class name from the class dictonary
 
                 cls = HBNBCommand.class_dic[cls_name]
-                method = getattr(cls, command)
-                method(arg)
-            except Exception as e:
-                print(f"Error: {e}")
+
+                if command == "create":
+                    self.do_create(cls_name)
+                elif command == "count":
+                    self.do_count(cls_name)
+                elif command == "all":
+                    self.do_all(cls_name)
+                elif command == "show":
+                    self.do_show('{} {}'.format(cls_name, arg))
+                elif command == "destroy":
+                    self.do_destroy('{} {}'.format(cls_name, arg))
+                elif command == "update":
+                    self.do_update('{} {}'.format(cls_name, arg))
+            except Exception:
+                print(msg)
 
     def default(self, line):
         """
