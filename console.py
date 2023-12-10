@@ -201,7 +201,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             try:
                 arg_split = args.split('.')
-                csl_name = arg.split[0]
+                cls_name = arg_split[0]
                 # removing the ')' from the remaining command & argument
                 cmd_arg = arg_split[1][:-1]
                 command = cmd_arg.split('(')[0]
@@ -209,7 +209,7 @@ class HBNBCommand(cmd.Cmd):
 
                 # getting the class name from the class dictonary
 
-                cls = HBNBCommand.cls_dic[cls_name]
+                cls = HBNBCommand.class_dic[cls_name]
                 method = getattr(cls, command)
                 method(arg)
             except Exception as e:
