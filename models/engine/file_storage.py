@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 """ serialization and deserialization of instances to & from json"""
-
-
 import json
 import os
 
@@ -10,11 +8,6 @@ class FileStorage():
     """ class FileStorage"""
     __file_path = "file.json"
     __objects = {}
-    """ classes = {
-            "Place": Place, "State": State, "City": City,
-            "Amenity": Amenity, "Review": Review
-            }
-    """
 
     def all(self):
         """ return dictionary of objects """

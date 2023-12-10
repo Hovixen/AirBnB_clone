@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+""" This console is for manipulating objects with certain comands """
 import cmd
 from models.base_model import BaseModel
 from models.user import User
@@ -9,7 +9,6 @@ from models.place import Place
 from models.state import State
 from models.review import Review
 from models import storage
-""" This console is for manipulating objects with certain comands """
 
 
 class HBNBCommand(cmd.Cmd):
@@ -114,7 +113,7 @@ class HBNBCommand(cmd.Cmd):
         """
         Prints all string representation of all instance
         based or not on the class name
-        Syntax: all or all <class_nam>
+        Syntax: all or all <class_name>
         """
         arg = args.split()
         objects = []
@@ -190,53 +189,59 @@ class HBNBCommand(cmd.Cmd):
                         count += 1
                 print(count)
 
-    def do_cmd(self, args):
+    def custom_cmd(self, args):
         """
         Executes a custom command
         Syntax: <class_name>.<command>(<args>)
         Example: User.show("95b89993-f866-4f93-b4c0-990389b518b1")
         """
+        cmd_list = ["create", "count", "all", "show", "destroy", "update"]
         if not args:
             print("** command missing **")
         else:
-            msg = "*** Unknown syntax: {}".format(args)
-            try:
-                arg_split = args.split('.')
-                cls_name = arg_split[0]
-                # removing the ')' from the remaining command & argument
-                cmd_arg = arg_split[1][:-1]
-                command = cmd_arg.split('(')[0]
-                arg = cmd_arg.split('(')[1]
+            arg_split = args.split('.')
+            
+            if len(arg_split) == 2:
+                # prevents UnboundLocalError
+                command = None
+                try:
+                    # assign class name and command with arguments
+                    cls_name, cmd_with_arg = arg_split
 
-                # getting the class name from the class dictonary
+                    # assign command and arguments
+                    command, arg = cmd_with_arg[:-1].split('(')
 
-                cls = HBNBCommand.class_dic[cls_name]
+                    if command not in cmd_list:
+                        print("*** Unknown syntax: {}".format(args))
+                except ValueError:
+                    print("*** Unknown syntax: {}".format(args))
+            else:
+                print("*** Unknown syntax: {}".format(args))
+                return
 
-                if command == "create":
-                    self.do_create(cls_name)
-                elif command == "count":
-                    self.do_count(cls_name)
-                elif command == "all":
-                    self.do_all(cls_name)
-                elif command == "show":
-                    self.do_show('{} {}'.format(cls_name, arg))
-                elif command == "destroy":
-                    self.do_destroy('{} {}'.format(cls_name, arg))
-                elif command == "update":
-                    self.do_update('{} {}'.format(cls_name, arg))
-            except Exception:
-                print(msg)
+            if command == "create":
+                self.do_create(cls_name)
+            elif command == "count":
+                self.do_count(cls_name)
+            elif command == "all":
+                self.do_all(cls_name)
+            elif command == "show":
+                self.do_show('{} {}'.format(cls_name, arg))
+            elif command == "destroy":
+                self.do_destroy('{} {}'.format(cls_name, arg))
+            elif command == "update":
+                self.do_update('{} {}'.format(cls_name, arg))
 
     def default(self, line):
         """
         Default method to handle customized commands
         """
-        self.do_cmd(line)
+        self.custom_cmd(line)
 
 
 if __name__ == '__main__':
-    try:
-        HBNBCommand().cmdloop()
-    except KeyboardInterrupt:
-        print('')
-        exit
+    # try:
+    HBNBCommand().cmdloop()
+    # except KeyboardInterrupt:
+    # print('')
+    # exit
