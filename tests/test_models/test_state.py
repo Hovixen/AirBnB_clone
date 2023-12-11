@@ -25,5 +25,6 @@ class TestMyState(unittest.TestCase):
         """Check if the attribute is str"""
         self.assertIsInstance(self.new.name, str)
 
+
 if __name__ == '__main__':
     unittest.main()

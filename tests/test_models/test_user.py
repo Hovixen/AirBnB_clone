@@ -1,7 +1,5 @@
-!/usr/bin/python3
+#!/usr/bin/python3
 """New testing module"""
-
-
 import unittest
 from models.base_model import BaseModel
 from models.user import User
@@ -73,10 +71,10 @@ class TestMyUser(unittest.TestCase):
         self.new.first_name = 'Diva'
         self.new.last_name = 'Mapatelian'
 
-        self.assertTrue(type(self.new.email) == str)
-        self.assertTrue(type(self.new.password) == str)
-        self.assertTrue(type(self.new.first_name) == str)
-        self.assertTrue(type(self.new.last_name) == str)
+        self.assertTrue(type(self.new.email) is str)
+        self.assertTrue(type(self.new.password) is str)
+        self.assertTrue(type(self.new.first_name) is str)
+        self.assertTrue(type(self.new.last_name) is str)
 
     def test_right_class(self):
         """Check if the instance belongs to a right class"""
@@ -117,6 +115,7 @@ class TestMyUser(unittest.TestCase):
         with self.assertRaises(TypeError) as omg:
             self.new.save('omg', 'lol', 'dolls')
         self.assertTrue(omg)
+
 
 if __name__ == '__main__':
     unittest.main()
