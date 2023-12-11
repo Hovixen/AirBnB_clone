@@ -23,7 +23,7 @@ class FileStorage():
         dic = {}
         for key, obj in self.__objects.items():
             dic[key] = obj.to_dict()
-        with open(self.__file_path, 'w', encoding="utf-8") as file:
+        with open(self.__file_path, 'w') as file:
             json.dump(dic, file)
 
     def reload(self):
@@ -46,7 +46,7 @@ class FileStorage():
 
         j_file = os.path.exists(self.__file_path)
         if j_file:
-            with open(self.__file_path, 'r', encoding="utf-8") as file:
+            with open(self.__file_path, 'r') as file:
                 new = json.load(file)
                 for key, obj_dic in new.items():
                     get_class = obj_dic.get('__class__')
