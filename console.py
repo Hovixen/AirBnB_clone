@@ -158,18 +158,22 @@ class HBNBCommand(cmd.Cmd):
 
             if obj_key not in storage.all():
                 print("** no instance found **")
-            elif len(args) < 3:
+            elif len(arg) < 3:
                 print("** attribute name missing **")
-            elif len(args) < 4:
+            elif len(arg) < 4:
                 print("** value missing **")
             else:
                 attr_name = arg[2]
                 attr_val = arg[3].strip('"')
 
-                objects = storage.all()[obj_key]
-                setattr(objects, attr_name, attr_val)
+                #objects = storage.all()[obj_key]
+                #setattr(objects, attr_name, attr_val)
+                obj = storage.all()[obj_key]
+                if hasattr(obj, attr_name):
+                    setattr(obj, attr_name, attr_val)
+                    obj.save
 
-                objects.save()
+               # objects.save()
 
     def do_count(self, args):
         """
