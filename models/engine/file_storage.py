@@ -24,17 +24,36 @@ class FileStorage():
         dic = {}
         for key, obj in self.__objects.items():
             dic[key] = obj.to_dict()
-        with open(self.__file_path, mode = "w", encoding = "utf-8") as file:
-            json.dump(dic, file)
+         new_dic = json.dumps(dic, default=format_datetime)
+
+        with open(self.__file_path, 'w') as file:
+            file.write(new_dic)
 
     def reload(self):
-        """ loads objects from file """
-        try:
-            with open(self.__file_path, mode = "r", encoding = "utf-8") as file:
-                new = json.load(file)
-                for key, obj_dict in new.items():
-                    class_name, obj_id = key.split('.')
-                    obj = globals()[class_name](**obj_dict)
-                    self.__objects[key] = obj
-        except FileNotFoundError:
-            pass
+        """ deserializes objects from existing file.jason """
+        # This import is uses here to prevent circular import
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.amenity import Amenity
+        from models.city import City
+        from models.place import Place
+        from models.state import State
+        from models.review import Review
+
+        # a class mapping dictionary to get the class
+
+        cls_dic = {'BaseModel': BaseModel, 'User': User,
+                   'Amenity': Amenity, 'City': City,
+                   'Place': Place, 'State': State,
+                   'Review': Review}
+
+        j_file = os.path.exists(self.__file_path)
+        if j_file:
+            with open(self.__file_path, 'r') as file:
+                new = file.read()
+                new_objects = json.loads(new)
+                for key, obj_dic in new.items():
+                    get_class = obj_dic.get('__class__')
+                    obj_class = cls_dic[get_class]
+                    obj = obj_class(**obj_dic)
+                    self.new(obj)
