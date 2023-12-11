@@ -2,6 +2,7 @@
 ![HBnB Logo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrg8gNSYk0nYCCEmHrbv52AbFktwgIuvxkqniGW-rzfg8SfLIfZKScs8yRZA&s)
 
 
+Now it’s time to re-create an instance with this new new new 
 ### Contents
 
 - [Description](#Description)
