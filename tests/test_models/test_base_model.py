@@ -25,11 +25,11 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(str(obj), expected_str)
 
     def test_save_method(self):
-        # Test save method
-        obj = BaseModel()
-        original_updated_at = obj.updated_at
-        obj.save()
-        self.assertNotEqual(original_updated_at, obj.updated_at)
+        """Check updated_at value after save is executed"""
+        current_value = self.instance.updated_at
+        new_value = self.instance.save()
+
+        self.assertNotEqual(current_value, new_value)
 
     def test_to_dict_method(self):
         # Test to_dict method
