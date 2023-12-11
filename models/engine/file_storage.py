@@ -16,14 +16,14 @@ class FileStorage():
     def new(self, obj):
         """ assigns objects """
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        FileStorage.__objects[key] = obj
+        self.__objects[key] = obj
 
     def save(self):
         """ save objects to json file """
         dic = {}
-        for key, obj in FileStorage.__objects.items():
+        for key, obj in self.__objects.items():
             dic[key] = obj.to_dict()
-        with open(FileStorage.__file_path, 'w') as file:
+        with open(self.__file_path, 'w') as file:
             json.dump(dic, file)
 
     def reload(self):
@@ -44,9 +44,9 @@ class FileStorage():
                    'Place': Place, 'State': State,
                    'Review': Review}
 
-        j_file = os.path.exists(FileStorage.__file_path)
+        j_file = os.path.exists(self.__file_path)
         if j_file:
-            with open(FileStorage.__file_path, 'r') as file:
+            with open(self.__file_path, 'r') as file:
                 new = json.load(file)
                 for key, obj_dic in new.items():
                     get_class = obj_dic.get('__class__')
