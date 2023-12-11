@@ -166,10 +166,14 @@ class HBNBCommand(cmd.Cmd):
                 attr_name = arg[2]
                 attr_val = arg[3].strip('"')
 
-                objects = storage.all()[obj_key]
-                setattr(objects, attr_name, attr_val)
+                #objects = storage.all()[obj_key]
+                #setattr(objects, attr_name, attr_val)
+                obj = storage.all()[obj_key]
+                if hasattr(obj, attr_name):
+                    setattr(obj, attr_name, attr_val)
+                    obj.save
 
-                objects.save()
+               # objects.save()
 
     def do_count(self, args):
         """
