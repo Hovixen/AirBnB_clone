@@ -2,7 +2,6 @@
 ![HBnB Logo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrg8gNSYk0nYCCEmHrbv52AbFktwgIuvxkqniGW-rzfg8SfLIfZKScs8yRZA&s)
 
 
-Now it’s time to re-create an instance with this new new new 
 ### Contents
 
 - [Description](#Description)
@@ -26,7 +25,7 @@ The console was developed in `Ubuntu 20.04LTS`.
 For further information on python version, and documentation visit [python.org](https://www.python.org/).
 
 ## Requirements :card_file_box:
-Knowledge in python3, how to use a command line interpreter, a computer with Ubuntu 14.04, python3 and pep8 style corrector.
+Knowledge in python3, how to use a command line interpreter, a computer with Ubuntu 20.04LTS or higher, python3 and pep8 style corrector *(pycodestyle)*.
 
 ## Repo Contents :card_index_dividers:
 This repository constains the following files:
@@ -74,49 +73,46 @@ $ git clone https://github.com/------/AirBnB_clone.git
 |[quit/ EOF](./console.py)| Exit the program |
 
 
-```
-➜  AirBnB_clone git:(feature) ✗ ./console.py
-(hbnb) create User
-bb4f4b81-7757-460b-9263-743c9ea6fef6
-(hbnb) show User bb4f4b81-7757-460b-9263-743c9ea6fef6
-[User] (bb4f4b81-7757-460b-9263-743c9ea6fef6) {'updated_at': datetime.datetime(2019, 11, 13, 17, 7, 45, 492139), 'id': 'bb4f4b81-7757-460b-9263-743c9ea6fef6', 'created_at': datetime.datetime(2019, 11, 13, 17, 7, 45, 492106)}
-(hbnb) all User
-["[User] (bb4f4b81-7757-460b-9263-743c9ea6fef6) {'updated_at': datetime.datetime(2019, 11, 13, 17, 7, 45, 492139), 'id': 'bb4f4b81-7757-460b-9263-743c9ea6fef6', 'created_at': datetime.datetime(2019, 11, 13, 17, 7, 45, 492106)}"]
-(hbnb) update User bb4f4b81-7757-460b-9263-743c9ea6fef6 name Betty
-['User', 'bb4f4b81-7757-460b-9263-743c9ea6fef6', 'name', 'Betty']
-(hbnb) all User
-["[User] (bb4f4b81-7757-460b-9263-743c9ea6fef6) {'updated_at': datetime.datetime(2019, 11, 13, 17, 7, 45, 492139), 'id': 'bb4f4b81-7757-460b-9263-743c9ea6fef6', 'name': 'Betty', 'created_at': datetime.datetime(2019, 11, 13, 17, 7, 45, 492106)}"]
-(hbnb) destroy User bb4f4b81-7757-460b-9263-743c9ea6fef6
-(hbnb) all User
-[]
-(hbnb) show User
-** instance id missing **
-(hbnb)
+## How the console works :gear:
 
 ```
-
-
-```
-➜  AirBnB_clone git:(feature) ⇌ ./console.py
-(hbnb) User.create
-*** Unknown syntax: User.create
-(hbnb) User.create()
-4200f9c9-9df4-432f-b1a5-30f89d352cc2
-(hbnb) User.all()
-["[User] (4200f9c9-9df4-432f-b1a5-30f89d352cc2) {'id': '4200f9c9-9df4-432f-b1a5-30f89d352cc2', 'updated_at': datetime.datetime(2019, 11, 13, 17, 14, 1, 963404), 'created_at': datetime.datetime(2019, 11, 13, 17, 14, 1, 963373)}"]
-(hbnb) User.show()
-** instance id missing **
-(hbnb) User.show(e6ee5344-04ef-454d-84e4-ba6fc613f1b4)
-[User] (e6ee5344-04ef-454d-84e4-ba6fc613f1b4) {'id': 'e6ee5344-04ef-454d-84e4-ba6fc613f1b4', 'updated_at': datetime.datetime(2019, 11, 13, 17, 14, 1, 963404), 'created_at': datetime.datetime(2019, 11, 13, 17, 14, 1, 963373)}
-(hbnb) User.update("e6ee5344-04ef-454d-84e4-ba6fc613f1b4", "name", "Betty")
-['User', '"e6ee5344-04ef-454d-84e4-ba6fc613f1b4"', '"name"', '"Betty"']
-(hbnb) User.all()
-['[User] (e6ee5344-04ef-454d-84e4-ba6fc613f1b4) {\'"name"\': \'"Betty"\', \'id\': \'e6ee5344-04ef-454d-84e4-ba6fc613f1b4\', \'updated_at\': datetime.datetime(2019, 11, 13, 17, 14, 1, 963404), \'created_at\': datetime.datetime(2019, 11, 13, 17, 14, 1, 963373)}']
-(hbnb) User.destroy(e6ee5344-04ef-454d-84e4-ba6fc613f1b4)
-(hbnb) User.all()
-[]
+➜ $ ./console.py
+(hbnb) create Place
+5d6cd533-527b-42a5-96f2-0bdad4d67975
+(hbnb) all Place
+["[Place] (5d6cd533-527b-42a5-96f2-0bdad4d67975) {'id': '5d6cd533-527b-42a5-96f2-0bdad4d67975', 'created_at': datetime.datetime(2023, 12, 11, 14, 46, 23, 260586), 'updated_at': datetime.datetime(2023, 12, 11, 14, 46, 23, 260615)}"]
+(hbnb) update Place 5d6cd533-527b-42a5-96f2-0bdad4d67975 Location "Paris"
+(hbnb) show Place 5d6cd533-527b-42a5-96f2-0bdad4d67975
+[Place] (5d6cd533-527b-42a5-96f2-0bdad4d67975) {'id': '5d6cd533-527b-42a5-96f2-0bdad4d67975', 'created_at': datetime.datetime(2023, 12, 11, 14, 46, 23, 260586), 'updated_at': datetime.datetime(2023, 12, 11, 14, 47, 25, 119209), 'Location': 'Paris'}
+(hbnb) destroy Place 5d6cd533-527b-42a5-96f2-0bdad4d67975
+(hbnb) show Place 5d6cd533-527b-42a5-96f2-0bdad4d67975
+** no instance found **
+(hbnb) count Place
+0
 (hbnb) quit
-➜  AirBnB_clone git:(feature) ⁜※
+$
+```
+
+
+```
+➜ $ ./console.py
+(hbnb) User.destroy(b8f62bb2-2a87-41be-87a6-6c2e3d2fbd9e)
+(hbnb)
+vagrant@hovixen:~/AirBnB_clone$ ./console.py
+(hbnb) User.create()
+5e8f367e-2297-45a1-9a3d-4f4b0c3aa716
+(hbnb) User.all()
+["[User] (5e8f367e-2297-45a1-9a3d-4f4b0c3aa716) {'id': '5e8f367e-2297-45a1-9a3d-4f4b0c3aa716', 'created_at': datetime.datetime(2023, 12, 11, 14, 58, 57, 472550), 'updated_at': datetime.datetime(2023, 12, 11, 14, 58, 57, 472591)}"]
+(hbnb) User.update(5e8f367e-2297-45a1-9a3d-4f4b0c3aa716 first_name "Bomma")
+(hbnb) User.show(5e8f367e-2297-45a1-9a3d-4f4b0c3aa716)
+[User] (5e8f367e-2297-45a1-9a3d-4f4b0c3aa716) {'id': '5e8f367e-2297-45a1-9a3d-4f4b0c3aa716', 'created_at': datetime.datetime(2023, 12, 11, 14, 58, 57, 472550), 'updated_at': datetime.datetime(2023, 12, 11, 15, 0, 14, 872687), 'first_name': 'Bomma'}
+(hbnb) User.destroy(5e8f367e-2297-45a1-9a3d-4f4b0c3aa716)
+(hbnb) User.all()
+[]
+(hbnb) User.show(5e8f367e-2297-45a1-9a3d-4f4b0c3aa716)
+** no instance found **
+(hbnb) quit
+➜ $⁜※
 
 ```
 
