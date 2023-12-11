@@ -200,7 +200,7 @@ class HBNBCommand(cmd.Cmd):
             print("** command missing **")
         else:
             arg_split = args.split('.')
-            
+
             if len(arg_split) == 2:
                 # prevents UnboundLocalError
                 command = None
