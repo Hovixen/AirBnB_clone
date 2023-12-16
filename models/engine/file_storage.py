@@ -48,8 +48,27 @@ class FileStorage():
         if j_file:
             with open(self.__file_path, 'r') as file:
                 new = json.load(file)
+<<<<<<< HEAD
+                for key, obj_dict in new.items():
+                    get_class = obj_dict.get('__class__')
+                    #get_class = get_class.strip()
+                    #obj_class = cls_dic[get_class]
+                    #obj = obj_class(**obj_dict)
+                    #self.new(obj)
+                    if get_class:
+                        get_class = get_class.strip()
+                        obj_class = cls_dic.get(get_class)
+                        if obj_class:
+                            obj = obj_class(**obj_dict)
+                            self.new(obj)
+                        else:
+                            print(f"Class not found in cls_dic for key: {get_class}")
+                    else:
+                        print("'__class__' key not found in obj_dict")
+=======
                 for key, obj_dic in new.items():
                     get_class = obj_dic.get('__class__')
                     obj_class = cls_dic[get_class]
                     obj = obj_class(**obj_dic)
                     self.new(obj)
+>>>>>>> baa8c7fe3abb3841de737daf05672edc464469c4
