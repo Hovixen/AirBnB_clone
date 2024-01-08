@@ -120,6 +120,6 @@ vagrant@hovixen:~/AirBnB_clone$ ./console.py
 `python3 3.8.10`
 
 
-### Authors :crayon:
+### Authors
 * [Doreen Ikilai](https://github.com/Demidorn)
 * [Nelson Erijo](https://github.com/Hovixen)
