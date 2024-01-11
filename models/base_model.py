@@ -20,15 +20,9 @@ class BaseModel():
                                                      "%Y-%m-%dT%H:%M:%S.%f")
             for key, value in kwargs.items():
                 if key != "__class__":
-<<<<<<< HEAD
-                    #if key in ["created_at", "updated_at"]:
-                        #value = datetime.strptime(
-                                #value, "%Y-%m-%dT%H:%M:%S.%f")
-=======
                     if key in ["updated_at", "created_at"]:
                         value = datetime.strptime(
                                 value, "%Y-%m-%dT%H:%M:%S.%f")
->>>>>>> baa8c7fe3abb3841de737daf05672edc464469c4
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
